@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>Matixs</Authors>
+    <Product>Tlumacz Foczek</Product>
+    <ApplicationIcon>ikona.ico</ApplicationIcon>
+    <AssemblyName>LuaConverter</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ikona.ico" />
+    <None Remove="Resources\EndOfFile.txt" />
+    <None Remove="Resources\words.gz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EndOfFile.txt" />
+    <EmbeddedResource Include="Resources\words.gz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ikona.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

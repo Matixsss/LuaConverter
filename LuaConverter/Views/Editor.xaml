@@ -1,0 +1,194 @@
+﻿<UserControl x:Class="LuaConverter.Views.Editor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LuaConverter.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MaxHeight="60"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" >
+            <Grid  Background="Bisque">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding Path=OnlyEnglish, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Tylko nieprzetłumaczone"></CheckBox>
+                <TextBox Margin="8" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding SearchText}"></TextBox>
+                <Button Grid.Column="4" Margin="10" Command="{Binding SaveButton}">Zapisz</Button>
+                <Button Grid.Column="3" Margin="10" Command="{Binding FindButton}">Szukaj</Button>
+            </Grid>
+        </Border>
+  
+
+        <Grid Grid.Row="1" Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="*" MaxHeight="60"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--Item id-->
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                    <Grid  Background="Cornsilk">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38*"></ColumnDefinition>
+                            <ColumnDefinition Width="37*"></ColumnDefinition>
+                            <ColumnDefinition Width="25*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="0" FontSize="16">Item ID:</TextBlock>
+                        <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="1" FontSize="16" Text="{Binding GetItem.ID}"></TextBlock>
+                        <Image Margin="5,5,5,5" Grid.Column="2" Source="{Binding GetImage}"></Image>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <TextBlock Text="{Binding IsEnglish}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>                    
+                </Grid>
+
+                <!--identifiedDisplayName-->
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,1">
+                    <Grid Background="Cornsilk">
+                        <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="0" FontSize="16">identifiedDisplayName</TextBlock>
+                    </Grid>
+                </Border>
+
+                <!--identifiedDisplayName Value-->
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
+                    <Grid Background="Cornsilk">
+                        <TextBox TextWrapping="Wrap" Margin="5" FontSize="{Binding FontSize}" TextAlignment="Center" Text="{Binding GetItem.IdentifiedDisplayName}"></TextBox>
+                    </Grid>
+                </Border>
+
+                <!--identifiedDescriptionName-->
+                <Border Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,1,1">
+                    <Grid Background="Cornsilk">
+                        <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="0" FontSize="16">identifiedDescriptionName</TextBlock>
+                    </Grid>
+                </Border>
+
+                <!--identifiedDescriptionName Value-->
+                <Border Grid.Row="1" Grid.RowSpan="4" Grid.Column="2" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                    <Grid Background="Cornsilk">
+                        <TextBox Margin="5" FontSize="{Binding FontSize}" TextAlignment="Justify" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding GetItem.IdentifiedDescriptionName}"></TextBox>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="0,1,1,1">
+                    <Grid Background="Cornsilk">
+                        <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="0" FontSize="16">unidentifiedDisplayName</TextBlock>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                    <Grid Background="Cornsilk">
+                        <TextBox TextWrapping="Wrap" Visibility="{Binding Visibility}" Margin="5" FontSize="{Binding FontSize}" TextAlignment="Center" Text="{Binding GetItem.UnidentifiedDisplayName}"></TextBox>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="0,1,0,0">
+                    <StackPanel Background="MintCream">
+                        <TextBlock HorizontalAlignment="Center" Text="Schowaj unidentified"></TextBlock>
+                        <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=HideUnidentified, Mode=TwoWay}"></CheckBox>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,1,0,1">
+                    <Grid Background="Cornsilk">
+                        <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="0" FontSize="16">unidentifiedDescriptionName</TextBlock>
+                    </Grid>
+                </Border>
+
+                <Border  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,1,1">
+                    <Grid Background="Cornsilk">
+                        <TextBox Visibility="{Binding Visibility}" Margin="5" FontSize="{Binding FontSize}" Text="{Binding GetItem.UnidentifiedDescriptionName}"></TextBox>
+                    </Grid>
+                </Border>
+
+
+
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1"  Text="Stron" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding GetKeyCount}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                    </Grid>
+               
+                    <Button Grid.Column="0" Margin="5" Content="&lt;" Command="{Binding LeftButton}"></Button>
+                    <Button Grid.Column="3" Margin="5" Content="&gt;" Command="{Binding RightButton}"></Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="Rozmiar czcionki: " FontSize="18"></TextBlock>
+                        <ComboBox Name="CocoJambo" Margin="5"  MinWidth="60" SelectionChanged="ComboBox_SelectionChanged">
+                            <ComboBoxItem>12</ComboBoxItem>
+                            <ComboBoxItem>14</ComboBoxItem>
+                            <ComboBoxItem IsSelected="True">16</ComboBoxItem>
+                            <ComboBoxItem>18</ComboBoxItem>
+                            <ComboBoxItem>20</ComboBoxItem>
+                            <ComboBoxItem>22</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBox TextAlignment="Center" Grid.Column="1" MaxWidth="80" Text="{Binding SelectedKey}"></TextBox>
+               
+                    <Label Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Pozostało do przetłumaczenia: "></Label>
+                    <Label Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="{Binding ToTranslate}"></Label>
+                 
+                </Grid>
+              
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
