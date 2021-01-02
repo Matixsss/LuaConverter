@@ -14,7 +14,7 @@ namespace LuaConverter.Model
         public string IdentifiedDisplayName { get; set; }
         public string IdentifiedResourceName { get; set; }
         public string IdentifiedDescriptionName { get; set; }
-        public string SlotCount { get; set; }
-        public string ClassNum { get; set; }
+        public int SlotCount { get; set; }
+        public int ClassNum { get; set; }
     }
 }

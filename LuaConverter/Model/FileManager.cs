@@ -71,9 +71,24 @@ namespace LuaConverter.Model
             var tmp = lines.Length - 1;
             for (int i=0;i<tmp;i++)
             {
-                lines[i] = "\t\t\t\"" + lines[i]+ "\",";
+                if(lines[i].Length > 1 && lines[i].ElementAt(lines[i].Length-1) == '\\')
+                {
+                    lines[i] = "\t\t\t\"" + lines[i] + "\"\",";
+                }
+                else
+                {
+                    lines[i] = "\t\t\t\"" + lines[i] + "\",";
+                }       
             }
-            lines[tmp] = "\t\t\t\"" + lines[tmp] + "\""; 
+
+            if (lines[tmp].Length > 1 && lines[tmp].ElementAt(lines[tmp].Length - 1) == '\\')
+            {
+                lines[tmp] = "\t\t\t\"" + lines[tmp] + "\"\"";
+            }
+            else
+            {
+                lines[tmp] = "\t\t\t\"" + lines[tmp] + "\"";
+            }
             return string.Join("\r\n", lines);
         }
 
@@ -175,14 +190,22 @@ namespace LuaConverter.Model
                     indexes[j] = fileText.IndexOf('=', indexes[j-1]+1);
                 }
 
-                string unidentifiedDisplayName = TextToObject.OneLineString(ref fileText, indexes[0]);
-                string unidentifiedResourceName = TextToObject.OneLineString(ref fileText, indexes[1]);
-                string unidentifiedDescriptionName = TextToObject.MultiLineString(ref fileText, indexes[2]);
-                string identifiedDisplayName = TextToObject.OneLineString(ref fileText, indexes[3]);
-                string identifiedResourceName = TextToObject.OneLineString(ref fileText, indexes[4]);
-                string identifiedDescriptionName = TextToObject.MultiLineString(ref fileText, indexes[5]);
-                string slotCount = TextToObject.OneLineString(ref fileText, indexes[6]).Replace(",", "");
-                string classNum = TextToObject.OneLineString(ref fileText, indexes[7]).Replace(",", "");
+                string unidentifiedDisplayName = LineParser.OneLineString(ref fileText, indexes[0]);
+                string unidentifiedResourceName = LineParser.OneLineString(ref fileText, indexes[1]);
+                string unidentifiedDescriptionName = LineParser.MultiLineString(ref fileText, indexes[2]);
+                string identifiedDisplayName = LineParser.OneLineString(ref fileText, indexes[3]);
+                string identifiedResourceName = LineParser.OneLineString(ref fileText, indexes[4]);
+                string identifiedDescriptionName = LineParser.MultiLineString(ref fileText, indexes[5]);
+                int slotCount, classNum;
+                if(!int.TryParse(LineParser.OneLineString(ref fileText, indexes[6]).Replace(",", ""),out slotCount))
+                {
+                    slotCount = 0;
+                    MessageBox.Show(id + " zamiana slotCount na 0");
+                }
+                if (!int.TryParse(LineParser.OneLineString(ref fileText, indexes[7]).Replace(",", ""), out classNum))
+                {
+                    classNum = 0;
+                }
 
                 bool isEnglish = CheckEnglish(identifiedDisplayName, identifiedDescriptionName);
                 if (isEnglish)

@@ -306,7 +306,7 @@ namespace LuaConverter.ViewModels
         {
             // code goes here
             TickCount++;
-            Trace.WriteLine("tick");
+            //Trace.WriteLine("tick");
             if(TickCount%60==0)
             {
                 AutoSave();
